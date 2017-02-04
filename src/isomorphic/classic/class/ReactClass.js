@@ -11,7 +11,7 @@
 
 'use strict';
 
-var ReactComponent = require('ReactComponent');
+var ReactBaseClasses = require('ReactBaseClasses');
 var ReactElement = require('ReactElement');
 var ReactPropTypeLocationNames = require('ReactPropTypeLocationNames');
 var ReactNoopUpdateQueue = require('ReactNoopUpdateQueue');
@@ -19,6 +19,8 @@ var ReactNoopUpdateQueue = require('ReactNoopUpdateQueue');
 var emptyObject = require('emptyObject');
 var invariant = require('invariant');
 var warning = require('warning');
+
+var ReactComponent = ReactBaseClasses.Component;
 
 import type { ReactPropTypeLocations } from 'ReactPropTypeLocations';
 
@@ -169,7 +171,6 @@ var ReactClassInterface: {[key: string]: SpecPolicy} = {
    *   }
    *
    * @return {ReactComponent}
-   * @nosideeffects
    * @required
    */
   render: 'DEFINE_ONCE',
@@ -677,7 +678,7 @@ function bindAutoBindMethod(component, method) {
         warning(
           false,
           'bind(): React component methods may only be bound to the ' +
-          'component instance. See %s',
+          'component instance.\n\nSee %s',
           componentName
         );
       } else if (!args.length) {
@@ -685,7 +686,7 @@ function bindAutoBindMethod(component, method) {
           false,
           'bind(): You are binding a component method to the component. ' +
           'React does this for you automatically in a high-performance ' +
-          'way, so you can safely remove this call. See %s',
+          'way, so you can safely remove this call.\n\nSee %s',
           componentName
         );
         return boundMethod;

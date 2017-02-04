@@ -68,7 +68,7 @@ function getDeclarationErrorAddendum() {
   var ownerName = getCurrentFiberOwnerName();
   if (ownerName) {
     // TODO: also report the stack.
-    return ' This DOM node was rendered by `' + ownerName + '`.';
+    return '\n\nThis DOM node was rendered by `' + ownerName + '`.';
   }
   return '';
 }
@@ -261,6 +261,13 @@ function trapBubbledEventsLocal(node : Element, tag : string) {
       ReactBrowserEventEmitter.trapBubbledEvent(
         'topInvalid',
         'invalid',
+        node
+      );
+      break;
+    case 'details':
+      ReactBrowserEventEmitter.trapBubbledEvent(
+        'topToggle',
+        'toggle',
         node
       );
       break;
@@ -518,6 +525,7 @@ var ReactDOMFiberComponent = {
       case 'object':
       case 'source':
       case 'video':
+      case 'details':
         trapBubbledEventsLocal(domElement, tag);
         props = rawProps;
         break;

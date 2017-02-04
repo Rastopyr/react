@@ -39,6 +39,8 @@ src/addons/__tests__/ReactComponentWithPureRenderMixin-test.js
 * does not do a deep comparison
 
 src/addons/__tests__/ReactFragment-test.js
+* should throw if a plain object is used as a child
+* should throw if a plain object even if it is in an owner
 * warns for numeric keys on objects as children
 * should warn if passing null to createFragment
 * should warn if passing an array to createFragment
@@ -521,6 +523,7 @@ src/renderers/dom/__tests__/ReactDOMProduction-test.js
 * should use prod React
 * should handle a simple flow
 * should call lifecycle methods
+* should throw with an error code in production
 * should keep track of namespace across portals in production
 
 src/renderers/dom/fiber/__tests__/ReactDOMFiber-test.js
@@ -1433,6 +1436,7 @@ src/renderers/shared/shared/__tests__/ReactCompositeComponentState-test.js
 
 src/renderers/shared/shared/__tests__/ReactEmptyComponent-test.js
 * should not produce child DOM nodes for null and false
+* should still throw when rendering to undefined
 * should be able to switch between rendering null and a normal tag
 * should be able to switch in a list of children
 * should distinguish between a script placeholder and an actual script tag
@@ -1480,6 +1484,7 @@ src/renderers/shared/shared/__tests__/ReactErrorBoundaries-test.js
 * lets different boundaries catch their own first errors
 * discards a bad root if the root component fails
 * renders empty output if error boundary does not handle the error
+* passes first error when two errors happen in commit
 
 src/renderers/shared/shared/__tests__/ReactIdentity-test.js
 * should allow key property to express identity

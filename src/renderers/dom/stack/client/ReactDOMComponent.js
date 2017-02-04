@@ -66,7 +66,7 @@ function getDeclarationErrorAddendum(internalInstance) {
     if (owner) {
       var name = owner.getName();
       if (name) {
-        return ' This DOM node was rendered by `' + name + '`.';
+        return '\n\nThis DOM node was rendered by `' + name + '`.';
       }
     }
   }
@@ -331,6 +331,15 @@ function trapBubbledEventsLocal() {
         ),
       ];
       break;
+    case 'details':
+      inst._wrapperState.listeners = [
+        ReactBrowserEventEmitter.trapBubbledEvent(
+          'topToggle',
+          'toggle',
+          node
+        ),
+      ];
+      break;
   }
 }
 
@@ -465,6 +474,7 @@ ReactDOMComponent.Mixin = {
       case 'object':
       case 'source':
       case 'video':
+      case 'details':
         this._wrapperState = {
           listeners: null,
         };

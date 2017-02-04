@@ -129,7 +129,7 @@ function traverseAllChildrenImpl(
           if (ReactCurrentOwner.current) {
             var mapsAsChildrenOwnerName = ReactCurrentOwner.current.getName();
             if (mapsAsChildrenOwnerName) {
-              mapsAsChildrenAddendum = ' Check the render method of `' + mapsAsChildrenOwnerName + '`.';
+              mapsAsChildrenAddendum = '\n\nCheck the render method of `' + mapsAsChildrenOwnerName + '`.';
             }
           }
           warning(
@@ -167,15 +167,10 @@ function traverseAllChildrenImpl(
           ' If you meant to render a collection of children, use an array ' +
           'instead or wrap the object using createFragment(object) from the ' +
           'React add-ons.';
-        if (children._isReactElement) {
-          addendum =
-            ' It looks like you\'re using an element created by a different ' +
-            'version of React. Make sure to use only one copy of React.';
-        }
         if (ReactCurrentOwner.current) {
           var name = ReactCurrentOwner.current.getName();
           if (name) {
-            addendum += ' Check the render method of `' + name + '`.';
+            addendum += '\n\nCheck the render method of `' + name + '`.';
           }
         }
       }
